@@ -1,6 +1,13 @@
 <resources>
     <string name="app_name">Lora Block</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
     <string name="new_game">New Game</string>
     <string name="load_game">Load Game</string>
     <string name="delete_last">Undo</string>
+    <string name="new_board">New Board</string>
+    <string name="player1">player 1</string>
+    <string name="player2">player 2</string>
+    <string name="player3">player 3</string>
+    <string name="player4">player 4</string>
 </resources>

@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools">
+
+<data>
+    <variable
+        name="viewModel"
+        type="com.crobridge.lorablock.LoraViewModel" />
+</data>
+
+<LinearLayout
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -50,7 +58,7 @@
             android:gravity="center"
             android:textStyle="bold"
             android:background="@drawable/back"
-            android:text='N'
+            android:text="@{viewModel.current_game.player1}"
             />
         <TextView
             android:id="@+id/header_title_player_2"
@@ -60,7 +68,7 @@
             android:gravity="center"
             android:textStyle="bold"
             android:background="@drawable/back"
-            android:text='E'
+            android:text="@{viewModel.current_game.player2}"
             />
         <TextView
             android:id="@+id/header_title_player_3"
@@ -70,7 +78,7 @@
             android:gravity="center"
             android:textStyle="bold"
             android:background="@drawable/back"
-            android:text='S'
+            android:text="@{viewModel.current_game.player3}"
             />
         <TextView
             android:id="@+id/header_title_player_4"
@@ -80,7 +88,7 @@
             android:gravity="center"
             android:textStyle="bold"
             android:background="@drawable/back"
-            android:text='W'
+            android:text="@{viewModel.current_game.player4}"
             />
     </LinearLayout>
 
@@ -119,7 +127,7 @@
             android:gravity="center"
             android:textStyle="bold"
             android:background="@drawable/back"
-            android:text='0'
+            android:text="@{String.valueOf(viewModel.total.score1)}"
             />
         <TextView
             android:id="@+id/scrore_player_2"
@@ -129,7 +137,7 @@
             android:gravity="center"
             android:textStyle="bold"
             android:background="@drawable/back"
-            android:text='0'
+            android:text="@{String.valueOf(viewModel.total.score2)}"
             />
         <TextView
             android:id="@+id/scrore_player_3"
@@ -139,7 +147,7 @@
             android:gravity="center"
             android:textStyle="bold"
             android:background="@drawable/back"
-            android:text='0'
+            android:text="@{String.valueOf(viewModel.total.score3)}"
             />
         <TextView
             android:id="@+id/scrore_player_4"
@@ -149,13 +157,25 @@
             android:gravity="center"
             android:textStyle="bold"
             android:background="@drawable/back"
-            android:text='0'
+            android:text="@{String.valueOf(viewModel.total.score4)}"
             />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/boardList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:srcCompat="@android:drawable/ic_input_add" />
+
 </LinearLayout>
+
+</layout>

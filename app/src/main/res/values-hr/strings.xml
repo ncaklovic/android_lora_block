@@ -1,6 +1,13 @@
 <resources>
     <string name="app_name">Lora blok</string>
+    <string name="ok">Da</string>
+    <string name="cancel">Ne</string>
     <string name="new_game">Nova igra</string>
     <string name="load_game">Učitaj igru</string>
     <string name="delete_last">Obriši zadnju</string>
+    <string name="new_board">Novo dijeljenje</string>
+    <string name="player1">igrač 1</string>
+    <string name="player2">igrač 2</string>
+    <string name="player3">igrač 3</string>
+    <string name="player4">igrač 4</string>
 </resources>
