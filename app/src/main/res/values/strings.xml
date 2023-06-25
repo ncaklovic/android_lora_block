@@ -10,4 +10,25 @@
     <string name="player2">player 2</string>
     <string name="player3">player 3</string>
     <string name="player4">player 4</string>
+    <string name="game">game</string>
+    <string name="by">by</string>
+    <string-array name="games">
+        <item>plus</item>
+        <item>minus</item>
+        <item>hearts</item>
+        <item>queens</item>
+        <item>heart king, last trick</item>
+        <item>sorting</item>
+        <item>prognosis</item>
+    </string-array>
+    <string-array name="games_short">
+        <item>+</item>
+        <item>-</item>
+        <item>H</item>
+        <item>Q</item>
+        <item>K</item>
+        <item>S</item>
+        <item>P</item>
+    </string-array>
+
 </resources>

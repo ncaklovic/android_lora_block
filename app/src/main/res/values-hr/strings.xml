@@ -10,4 +10,16 @@
     <string name="player2">igrač 2</string>
     <string name="player3">igrač 3</string>
     <string name="player4">igrač 4</string>
+    <string name="game">igra</string>
+    <string name="by">tko</string>
+    <string-array name="games">
+        <item>plus</item>
+        <item>minus</item>
+        <item>herčevi</item>
+        <item>dame</item>
+        <item>herc kralj, zadnji štih</item>
+        <item>slaga</item>
+        <item>prognoza</item>
+    </string-array>
+
 </resources>

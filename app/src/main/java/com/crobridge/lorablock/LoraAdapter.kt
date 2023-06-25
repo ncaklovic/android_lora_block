@@ -1,4 +1,3 @@
-
 package com.crobridge.lorablock
 
 import android.view.LayoutInflater
@@ -37,8 +36,8 @@ class LoraAdapter() : ListAdapter<Board,
     }
 
 
-    class ItemViewHolder private constructor(val binding: ListItemBinding)
-        : RecyclerView.ViewHolder(binding.root) {
+    class ItemViewHolder private constructor(val binding: ListItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Board) {
             binding.board = item

@@ -13,11 +13,11 @@ data class Board(
         @ColumnInfo(name = "game")
         var game: Long = 0L,
 
-        @ColumnInfo(name = "type") // 1..7
-        var type: Int = 1,
+        @ColumnInfo(name = "type") // 0..6
+        var type: Int = 0,
 
-        @ColumnInfo(name = "player") // 1..4
-        var player: Int = 1,
+        @ColumnInfo(name = "player") // 0..3
+        var player: Int = 0,
 
         @ColumnInfo(name = "score1")
         var score1: Int = 0,
