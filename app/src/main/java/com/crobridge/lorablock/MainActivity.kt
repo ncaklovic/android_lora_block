@@ -49,18 +49,21 @@ class MainActivity : AppCompatActivity() {
         binding.boardList.adapter = adapter
 
         view_model.boards.observe(this, Observer {
+            binding.fab.show()
+            used_games.clear()
+            last_player_index = null
             it?.let {
                 adapter.submitList(it)
-                if (it.isEmpty()) {
-                    last_player_index = null
-                    used_games.clear()
-                } else {
+                if (!it.isEmpty()) {
+                    if (it.size == 28) // R.array.games.size * 4
+                        binding.fab.hide()
                     last_player_index = it.last().player
                     val next_player = next_player_index()
                     it.forEach() {
                         if (it.player == next_player)
                             used_games.add(it.type)
                     }
+                    used_games.sortDescending() // ensure proper removing
                 }
             }
         })
@@ -70,7 +73,7 @@ class MainActivity : AppCompatActivity() {
         })
 
         val fab: FloatingActionButton = binding.fab
-
+        fab.hide()
         fab.setOnClickListener { _ ->
             newBoard()
         }
@@ -96,7 +99,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             R.id.delete_last -> {
-                view_model.delete_last_board()
+                deleteLastBoard()
                 true
             }
 
@@ -121,6 +124,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun loadGame(gameId: Long) {
         view_model.set_game_id(gameId)
+        binding.fab.show()
     }
 
     private fun newGame() {
@@ -129,17 +133,20 @@ class MainActivity : AppCompatActivity() {
         builder.setTitle(R.string.new_game)
         builder.setView(dialog_binding.root)
         builder.setNegativeButton(R.string.cancel, null)
-        builder.setPositiveButton(R.string.ok,
-            DialogInterface.OnClickListener { _, _ ->
-                newGame(
-                    dialog_binding.player1.text.toString(),
-                    dialog_binding.player2.text.toString(),
-                    dialog_binding.player3.text.toString(),
-                    dialog_binding.player4.text.toString()
-                )
-            })
+        builder.setPositiveButton(R.string.ok, null)
         val dialog = builder.create()
         dialog.show()
+        // validate input
+        dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener{
+            val player1 = dialog_binding.player1.text.toString()
+            val player2 = dialog_binding.player2.text.toString()
+            val player3 = dialog_binding.player3.text.toString()
+            val player4 = dialog_binding.player4.text.toString()
+            if(player1.isNotEmpty() && player2.isNotEmpty() && player3.isNotEmpty() && player4.isNotEmpty()){
+                newGame(player1, player2, player3, player4)
+                dialog.dismiss()
+            }
+        }
     }
 
     private fun newGame(player1: String, player2: String, player3: String, player4: String) {
@@ -149,27 +156,24 @@ class MainActivity : AppCompatActivity() {
         g.player3 = player3
         g.player4 = player4
         view_model.add_game(g)
+        binding.fab.show()
+    }
+
+    private fun deleteLastBoard(){
+        view_model.delete_last_board()
+        binding.fab.show()
     }
 
     private fun newBoard() {
+
         val dialog_binding = NewBoardBinding.inflate(layoutInflater)
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle(R.string.new_board)
-        builder.setView(dialog_binding.root)
-        builder.setNegativeButton(R.string.cancel, null)
-        builder.setPositiveButton(R.string.ok,
-            DialogInterface.OnClickListener { _, _ ->
-                newBoard(
-                    dialog_binding.type.selectedItemPosition,
-                    dialog_binding.score1.text.toString().toInt(),
-                    dialog_binding.score2.text.toString().toInt(),
-                    dialog_binding.score3.text.toString().toInt(),
-                    dialog_binding.score4.text.toString().toInt()
-                )
-            })
-        val dialog = builder.create()
         dialog_binding.player.text = next_player()
-        val games = ArrayList<String>(Arrays.asList(*resources.getStringArray(R.array.games)))
+        dialog_binding.score1.hint = player_name(0)
+        dialog_binding.score2.hint = player_name(1)
+        dialog_binding.score3.hint = player_name(2)
+        dialog_binding.score4.hint = player_name(3)
+        val all_games = resources.getStringArray(R.array.games)
+        val games = ArrayList<String>(Arrays.asList(*all_games))
         used_games.forEach {
             games.removeAt(it)
         }
@@ -178,7 +182,26 @@ class MainActivity : AppCompatActivity() {
             android.R.layout.simple_spinner_item, games
         )
         dialog_binding.type.adapter = adapter
+
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle(R.string.new_board)
+        builder.setView(dialog_binding.root)
+        builder.setNegativeButton(R.string.cancel, null)
+        builder.setPositiveButton(R.string.ok, null)
+        val dialog = builder.create()
         dialog.show()
+        // validate input
+        dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
+            val score1 = dialog_binding.score1.text.toString().toIntOrNull()
+            val score2 = dialog_binding.score2.text.toString().toIntOrNull()
+            val score3 = dialog_binding.score3.text.toString().toIntOrNull()
+            val score4 = dialog_binding.score4.text.toString().toIntOrNull()
+            if (score1 != null && score2 != null && score3 != null && score4 != null) {
+                val type = all_games.indexOf(dialog_binding.type.selectedItem.toString())
+                newBoard(type, score1, score2, score3, score4)
+                dialog.dismiss()
+            }
+        }
     }
 
     private fun newBoard(type: Int, score1: Int, score2: Int, score3: Int, score4: Int) {
