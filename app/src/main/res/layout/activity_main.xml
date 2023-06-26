@@ -32,60 +32,60 @@
 
             <TextView
                 android:id="@+id/header_title_game"
+                style="@style/textViewStyle"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/back"
                 android:gravity="center"
                 android:text="@string/game"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/header_title_by"
+                style="@style/textViewStyle"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/back"
                 android:gravity="center"
                 android:text="@string/by"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/header_title_player_1"
+                style="@style/textViewStyle"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
-                android:background="@drawable/back"
                 android:gravity="center"
                 android:text="@{viewModel.current_game.player1}"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/header_title_player_2"
+                style="@style/textViewStyle"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
-                android:background="@drawable/back"
                 android:gravity="center"
                 android:text="@{viewModel.current_game.player2}"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/header_title_player_3"
+                style="@style/textViewStyle"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
-                android:background="@drawable/back"
                 android:gravity="center"
                 android:text="@{viewModel.current_game.player3}"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/header_title_player_4"
+                style="@style/textViewStyle"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
-                android:background="@drawable/back"
                 android:gravity="center"
                 android:text="@{viewModel.current_game.player4}"
                 android:textStyle="bold" />
@@ -99,60 +99,60 @@
 
             <TextView
                 android:id="@+id/header_game"
+                style="@style/textViewStyle"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/back"
                 android:gravity="center"
                 android:text=""
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/header_by"
+                style="@style/textViewStyle"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/back"
                 android:gravity="center"
                 android:text=''
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/scrore_player_1"
+                style="@style/textViewStyle"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
-                android:background="@drawable/back"
                 android:gravity="center"
                 android:text="@{String.valueOf(viewModel.total.score1)}"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/scrore_player_2"
+                style="@style/textViewStyle"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
-                android:background="@drawable/back"
                 android:gravity="center"
                 android:text="@{String.valueOf(viewModel.total.score2)}"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/scrore_player_3"
+                style="@style/textViewStyle"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
-                android:background="@drawable/back"
                 android:gravity="center"
                 android:text="@{String.valueOf(viewModel.total.score3)}"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/scrore_player_4"
+                style="@style/textViewStyle"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
-                android:background="@drawable/back"
                 android:gravity="center"
                 android:text="@{String.valueOf(viewModel.total.score4)}"
                 android:textStyle="bold" />

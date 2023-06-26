@@ -1,0 +1,6 @@
+<resources>
+
+    <style name="textViewStyle">
+        <item name="android:background">@drawable/back</item>
+    </style>
+</resources>
