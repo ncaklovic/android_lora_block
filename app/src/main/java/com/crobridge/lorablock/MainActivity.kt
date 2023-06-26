@@ -26,7 +26,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var view_model: LoraViewModel
     private lateinit var games: List<Game>
     private var last_player_index: Int? = null
-    private var used_games: MutableList<Int> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +49,6 @@ class MainActivity : AppCompatActivity() {
 
         view_model.boards.observe(this, Observer {
             binding.fab.show()
-            used_games.clear()
             last_player_index = null
             it?.let {
                 adapter.submitList(it)
@@ -58,12 +56,6 @@ class MainActivity : AppCompatActivity() {
                     if (it.size == 28) // R.array.games.size * 4
                         binding.fab.hide()
                     last_player_index = it.last().player
-                    val next_player = next_player_index()
-                    it.forEach() {
-                        if (it.player == next_player)
-                            used_games.add(it.type)
-                    }
-                    used_games.sortDescending() // ensure proper removing
                 }
             }
         })
@@ -137,12 +129,12 @@ class MainActivity : AppCompatActivity() {
         val dialog = builder.create()
         dialog.show()
         // validate input
-        dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener{
+        dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
             val player1 = dialog_binding.player1.text.toString()
             val player2 = dialog_binding.player2.text.toString()
             val player3 = dialog_binding.player3.text.toString()
             val player4 = dialog_binding.player4.text.toString()
-            if(player1.isNotEmpty() && player2.isNotEmpty() && player3.isNotEmpty() && player4.isNotEmpty()){
+            if (player1.isNotEmpty() && player2.isNotEmpty() && player3.isNotEmpty() && player4.isNotEmpty()) {
                 newGame(player1, player2, player3, player4)
                 dialog.dismiss()
             }
@@ -159,7 +151,7 @@ class MainActivity : AppCompatActivity() {
         binding.fab.show()
     }
 
-    private fun deleteLastBoard(){
+    private fun deleteLastBoard() {
         view_model.delete_last_board()
         binding.fab.show()
     }
@@ -173,13 +165,10 @@ class MainActivity : AppCompatActivity() {
         dialog_binding.score3.hint = player_name(2)
         dialog_binding.score4.hint = player_name(3)
         val all_games = resources.getStringArray(R.array.games)
-        val games = ArrayList<String>(Arrays.asList(*all_games))
-        used_games.forEach {
-            games.removeAt(it)
-        }
         val adapter = ArrayAdapter(
             this,
-            android.R.layout.simple_spinner_item, games
+            android.R.layout.simple_spinner_item,
+            unused_games(ArrayList<String>(Arrays.asList(*all_games)))
         )
         dialog_binding.type.adapter = adapter
 
@@ -201,6 +190,16 @@ class MainActivity : AppCompatActivity() {
                 newBoard(type, score1, score2, score3, score4)
                 dialog.dismiss()
             }
+        }
+    }
+
+    private fun unused_games(all_games: List<String>): List<String> {
+        val next_player_index = next_player_index()
+        val used_games = view_model.boards.value!!.filter {
+            it.player == next_player_index
+        }.map { it -> it.type }
+        return all_games.filterIndexed { game, _ ->
+            game !in used_games
         }
     }
 
