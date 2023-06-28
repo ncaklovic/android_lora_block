@@ -13,12 +13,12 @@
     <string name="game">game</string>
     <string name="by">by</string>
     <string-array name="games">
-        <item>plus</item>
-        <item>minus</item>
+        <item>maximum</item>
+        <item>minimum</item>
         <item>hearts</item>
         <item>queens</item>
-        <item>heart king, last trick</item>
-        <item>sorting</item>
+        <item>king of hearts and last trick</item>
+        <item>lora</item>
         <item>prognosis</item>
     </string-array>
     <string-array name="games_short">
