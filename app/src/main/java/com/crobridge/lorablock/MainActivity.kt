@@ -105,7 +105,7 @@ class MainActivity : AppCompatActivity() {
         val items = games.map {
             "${fmt.format(it.startTimeMilliSec)} - ${it.player1},${it.player2},${it.player3},${it.player4} "
         }.toTypedArray()
-        val builder = AlertDialog.Builder(this)
+        val builder = AlertDialog.Builder(this, R.style.Theme_LoraBlock)
         builder.setTitle(R.string.load_game)
         builder.setItems(items) { _, index ->
             loadGame(games[index].id)
@@ -121,7 +121,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun newGame() {
         val dialog_binding = NewGameBinding.inflate(layoutInflater)
-        val builder = AlertDialog.Builder(this)
+        val builder = AlertDialog.Builder(this, R.style.Theme_LoraBlock)
         builder.setTitle(R.string.new_game)
         builder.setView(dialog_binding.root)
         builder.setNegativeButton(R.string.cancel, null)

@@ -3,19 +3,18 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="colorPrimary">#FF35654D</color>
+    <color name="colorPrimary">#FF2A513E</color>
     <color name="colorPrimaryDark">#FF2A513E</color>
     <color name="colorAccent">#FF00FF00</color>
 
-    <color name="colorBackground">#FFFF0000</color>
+    <color name="colorBackground">#FF000000</color>
     <color name="windowBackground">#FF000000</color>
-    <color name="background">#FFB9C9C0</color>
+    <color name="background">#FF1F3329</color>
 
-    <color name="textColor">#FF000000</color>
+    <color name="textColor">#FFFFFFFF</color>
     <color name="textColorPrimary">#FFFFFFFF</color>
     <color name="textColorSecondary">#FFFFFFFF</color>
 
-    <color name="statusBarColor">#FF35654D</color>
-    <color name="navigationBarColor">#FF35654D</color>
-
+    <color name="statusBarColor">#FF2A513E</color>
+    <color name="navigationBarColor">#FF2A513E</color>
 </resources>

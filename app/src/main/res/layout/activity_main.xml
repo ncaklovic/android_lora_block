@@ -21,8 +21,8 @@
             android:id="@+id/app_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:popupTheme="@style/Theme.LoraBlock"
-            app:theme="@style/Theme.LoraBlock" />
+            app:popupTheme="@style/Theme.Toolbar"
+            app:theme="@style/Theme.Toolbar" />
 
         <LinearLayout
             android:id="@+id/header_1"
@@ -171,6 +171,8 @@
             android:layout_gravity="bottom|end"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
+            app:tint="@color/textColorPrimary"
+            app:backgroundTint="@color/colorPrimary"
             app:srcCompat="@android:drawable/ic_input_add" />
 
     </LinearLayout>
