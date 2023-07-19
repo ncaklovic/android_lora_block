@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import com.crobridge.lorablock.databinding.ActivityMainBinding
@@ -187,8 +188,13 @@ class MainActivity : AppCompatActivity() {
             val score4 = dialog_binding.score4.text.toString().toIntOrNull()
             if (score1 != null && score2 != null && score3 != null && score4 != null) {
                 val type = all_games.indexOf(dialog_binding.type.selectedItem.toString())
-                newBoard(type, score1, score2, score3, score4)
-                dialog.dismiss()
+                if (validate_scores(type, score1, score2, score3, score4)) {
+                    newBoard(type, score1, score2, score3, score4)
+                    dialog.dismiss()
+                }
+                else {
+                    Toast.makeText(this, getString(R.string.invalid_input), Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
@@ -201,6 +207,50 @@ class MainActivity : AppCompatActivity() {
         return all_games.filterIndexed { game, _ ->
             game !in used_games
         }
+    }
+
+    private fun validate_scores(type: Int, score1: Int, score2: Int, score3: Int, score4: Int) : Boolean {
+
+        when (type) {
+            0 -> {
+                // maximum
+                val check = { n: Int -> n <= 0 }
+                if (!check(score1) || !check(score2) || !check(score3) || !check(score4) )
+                    return false
+            }
+            1,2 -> {
+                // minimum, hearts
+                val check = { n: Int -> n >= 0 }
+                if (!check(score1) || !check(score2) || !check(score3) || !check(score4) )
+                    return false
+            }
+            3 -> {
+                // queens
+                val check = { n: Int -> n == 0 || n == 2 || n == 4 || n == 6 || n == 8 }
+                if (!check(score1) || !check(score2) || !check(score3) || !check(score4) )
+                    return false
+            }
+
+            4 -> {
+                // king of hearts and last trick
+                val check = { n: Int -> n == 0 || n == 4 || n == 8 }
+                if (!check(score1) || !check(score2) || !check(score3) || !check(score4) )
+                    return false
+            }
+            5 -> {
+                // lora
+                val check = { n: Int -> n >= 0 }
+                return check(score1) && check(score2) && check(score3) && check(score4)
+            }
+
+            6 -> {
+                // prognosis
+                val check = { n: Int -> n == -3 || n == +3 }
+                return check(score1) && check(score2) && check(score3) && check(score4)
+            }
+
+        }
+        return score1 + score2 + score3 + score4 == if(type > 0) 8 else -8
     }
 
     private fun newBoard(type: Int, score1: Int, score2: Int, score3: Int, score4: Int) {

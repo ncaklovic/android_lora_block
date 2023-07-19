@@ -12,6 +12,7 @@
     <string name="player4">player 4</string>
     <string name="game">game</string>
     <string name="by">by</string>
+    <string name="invalid_input">Invalid input!</string>
     <string-array name="games">
         <item>maximum</item>
         <item>minimum</item>

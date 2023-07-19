@@ -12,6 +12,7 @@
     <string name="player4">igrač 4</string>
     <string name="game">igra</string>
     <string name="by">tko</string>
+    <string name="invalid_input">Krivi unos!</string>
     <string-array name="games">
         <item>plus</item>
         <item>minus</item>
