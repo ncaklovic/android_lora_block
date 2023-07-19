@@ -18,7 +18,7 @@ interface LoraDao {
     @Insert
     suspend fun insert(g: Game) : Long
 
-    @Query("SELECT * FROM Game")
+    @Query("SELECT * FROM Game ORDER BY id DESC")
     fun get_all_games(): LiveData<List<Game>>
 
     @Query("SELECT * FROM game WHERE id = :game_id")
